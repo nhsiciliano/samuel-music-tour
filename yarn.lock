@@ -3105,13 +3105,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wix/auto_sdk_stores_catalog-versioning@npm:1.0.36":
-  version: 1.0.36
-  resolution: "@wix/auto_sdk_stores_catalog-versioning@npm:1.0.36"
+"@wix/auto_sdk_stores_catalog-versioning@npm:1.0.37":
+  version: 1.0.37
+  resolution: "@wix/auto_sdk_stores_catalog-versioning@npm:1.0.37"
   dependencies:
     "@wix/sdk-runtime": ^0.5.0
     "@wix/sdk-types": ^1.13.35
-  checksum: 248a0db2332beb3a05d94ece163d26ce9256dce1a34e8c8cc30ecdc585b8d94409764879ebfd27cc41fa0aa1b9218dc1e50c117a8f99e4ebadaa1a323c210423
+  checksum: acc0aae615377429ba4ddf086c6595b75c3cef955c01e36edadcc5ace58dee254a4fb552e666a790343c6625710c3be51919c02fd5d4e706ddc1f05bbc379179
   languageName: node
   linkType: hard
 
@@ -3929,13 +3929,13 @@ __metadata:
   linkType: hard
 
 "@wix/stores@npm:^1.0.71":
-  version: 1.0.533
-  resolution: "@wix/stores@npm:1.0.533"
+  version: 1.0.534
+  resolution: "@wix/stores@npm:1.0.534"
   dependencies:
     "@wix/auto_sdk_stores_abandoned-carts": 1.0.25
     "@wix/auto_sdk_stores_brands-v-3": 1.0.35
     "@wix/auto_sdk_stores_catalog-imports-v-3": 1.0.6
-    "@wix/auto_sdk_stores_catalog-versioning": 1.0.36
+    "@wix/auto_sdk_stores_catalog-versioning": 1.0.37
     "@wix/auto_sdk_stores_collections": 1.0.22
     "@wix/auto_sdk_stores_customizations-v-3": 1.0.37
     "@wix/auto_sdk_stores_info-sections-v-3": 1.0.39
@@ -3950,7 +3950,7 @@ __metadata:
     "@wix/auto_sdk_stores_wishlist": 1.0.20
     "@wix/headless-stores": ^0.0.96
     "@wix/stores_app-extensions": 1.0.40
-  checksum: ab8e05112f209091266acba4f50f6ecc8e9d6b6c9e1e918700621aa791d8fa749683c37528d54d75e04889700432686014b3bf57cbe2c2c82db0abf1fcb1c273
+  checksum: 30d4ac4cf0ad28fe21c0684361fa13e470d9100626987221f048023dce09a12c7e5e317a64f9ec4be018f37d59d1bf85d2fd6ffa792a4361b41cd89950c25db0
   languageName: node
   linkType: hard
 
