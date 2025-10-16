@@ -5,7 +5,7 @@ import { TicketsTable } from '@app/components/Table/Table.client';
 import { getWixClient } from '@app/hooks/useWixClientServer';
 import { wixEventsV2 as wixEvents } from '@wix/events';
 import { Schedule } from '@app/components/Schedule/Schedule';
-import { TicketDefinitionExtended } from '@app/types/ticket';
+import { TicketDefinitionExtended, TicketPricing } from '@app/types/ticket';
 import testIds from '@app/utils/test-ids';
 import { headers } from 'next/headers';
 import EventRichText from '../EventRichText';
@@ -36,35 +36,45 @@ export default async function EventPage({ params }: any) {
     .find();
   const event = events?.length ? events![0] : null;
 
-  const [tickets, schedule, eventRichText] = event
-    ? await Promise.all([
-        (
-          await wixClient.eventOrders.queryAvailableTickets({
-            filter: { eventId: event._id },
-            offset: 0,
-            limit: 100,
-            sort: 'orderIndex:asc',
-          })
-        ).definitions?.map((ticket) => ({
+  let tickets: TicketDefinitionExtended[] = [];
+  let schedule: Awaited<
+    ReturnType<typeof wixClient.schedule.listScheduleItems>
+  > | null = null;
+
+  if (event) {
+    const [availableTickets, scheduleResponse] = await Promise.all([
+      wixClient.eventOrders.queryAvailableTickets({
+        filter: { eventId: event._id },
+        offset: 0,
+        limit: 100,
+        sort: 'orderIndex:asc',
+      }),
+      wixClient.schedule.listScheduleItems({
+        eventId: [event._id!],
+        limit: 100,
+      }),
+    ]);
+
+    tickets =
+      availableTickets.definitions?.map((ticket) => {
+        const pricing = (ticket.pricing ?? {}) as TicketPricing;
+        const extendedTicket: TicketDefinitionExtended = {
           ...ticket,
+          pricing,
           canPurchase:
             ticket.limitPerCheckout! > 0 &&
             (!ticket.salePeriod ||
               (new Date(ticket.salePeriod.endDate!) > new Date() &&
                 new Date(ticket.salePeriod.startDate!) < new Date())),
-        })) as TicketDefinitionExtended[],
-        wixClient.schedule.listScheduleItems({
-          eventId: [event._id!],
-          limit: 100,
-        }),
-        wixClient.wixEventsRichText
-          .queryRichContent()
-          .limit(1)
-          .eq('eventId', event._id!)
-          .find()
-          .then((evRichTexts) => evRichTexts.items?.[0]),
-      ])
-    : [];
+        };
+
+        return extendedTicket;
+      }) ?? [];
+
+    schedule = scheduleResponse;
+  }
+
+  const eventRichText = event?.description;
 
   return (
     <div className="mx-auto px-4 sm:px-14">
@@ -77,8 +87,8 @@ export default async function EventPage({ params }: any) {
             <div className="basis-1/2">
               <WixMediaImage
                 media={event.mainImage}
-                width={530}
-                height={530}
+                width={430}
+                height={430}
                 className="max-h-[320px] sm:h-[530px] sm:max-h-[530px]"
               />
             </div>
@@ -115,10 +125,10 @@ export default async function EventPage({ params }: any) {
                   Buy Tickets
                 </a>
               )}
-              {[
-                wixEvents.RegistrationStatusStatus.CLOSED_MANUALLY,
-                wixEvents.RegistrationStatusStatus.CLOSED_AUTOMATICALLY,
-              ].includes(event.registration?.status!) && (
+              {(event.registration?.status ===
+                wixEvents.RegistrationStatusStatus.CLOSED_MANUALLY ||
+                event.registration?.status ===
+                  wixEvents.RegistrationStatusStatus.CLOSED_AUTOMATICALLY) && (
                 <div>
                   <p className="border-2 inline-block p-3">
                     Registration is closed
@@ -151,7 +161,7 @@ export default async function EventPage({ params }: any) {
             {schedule?.items?.length ? (
               <div className="mb-4 sm:mb-14">
                 <h2 className="mt-7">SCHEDULE</h2>
-                <Schedule items={schedule.items} slug={event.slug!} />
+                <Schedule items={schedule?.items ?? []} slug={event.slug!} />
               </div>
             ) : null}
             {event.registration?.external && (
@@ -162,13 +172,13 @@ export default async function EventPage({ params }: any) {
                 Buy Tickets
               </a>
             )}
-            {[
-              wixEvents.RegistrationStatusStatus.CLOSED_MANUALLY,
-              wixEvents.RegistrationStatusStatus.OPEN_TICKETS,
-            ].includes(event.registration?.status!) && (
+            {(event.registration?.status ===
+              wixEvents.RegistrationStatusStatus.CLOSED_MANUALLY ||
+              event.registration?.status ===
+                wixEvents.RegistrationStatusStatus.OPEN_TICKETS) && (
               <div className="my-4 sm:my-10">
                 <h2 className="mt-7">TICKETS</h2>
-                <TicketsTable tickets={tickets!} event={event} />
+                <TicketsTable tickets={tickets} event={event} />
               </div>
             )}
             <div className="my-4">

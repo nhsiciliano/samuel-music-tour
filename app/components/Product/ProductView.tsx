@@ -14,7 +14,7 @@ export function ProductView({ product }: { product: products.Product }) {
           <div className="flex flex-col sm:flex-row gap-2">
             <div className="box-border flex flex-col basis-1/2">
               <div>
-                <ImageGalleryClient items={product.media!.items!} />
+                <ImageGalleryClient items={product.media?.items ?? []} />
               </div>
             </div>
             <div className="flex flex-col w-full h-full basis-1/2 text-left">

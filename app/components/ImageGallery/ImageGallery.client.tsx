@@ -4,7 +4,8 @@ import { products } from '@wix/stores';
 import { PLACEHOLDER_IMAGE } from '@app/constants';
 import { WixMediaImage } from '@app/components/Image/WixMediaImage';
 export function ImageGalleryClient({ items }: { items: products.MediaItem[] }) {
-  const { theme } = useTheme();
+  const themeContext = useTheme();
+  const theme = themeContext.theme;
   const images = items.length ? items : [{ image: { url: PLACEHOLDER_IMAGE } }];
   return (
     <div className="h-56 sm:h-96 max-h-96 max-w-xl mx-auto">

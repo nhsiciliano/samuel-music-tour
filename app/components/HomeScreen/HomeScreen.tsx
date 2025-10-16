@@ -9,7 +9,7 @@ export function HomeScreen({
   events,
   productsForCategories,
 }: {
-  events: wixEvents.V3Event[];
+  events: wixEvents.Event[];
   productsForCategories: { category: string; product: products.Product }[];
 }) {
   return (
@@ -23,12 +23,11 @@ export function HomeScreen({
             >
               <h1 className="text-5xl sm:text-[120px] leading-none animate-fade-in">
                 USA
-                <br /> SUMMER
+                <br /> WINTER
                 <br /> TOUR
               </h1>
               <h3 className="text-base sm:text-2xl py-6">
-                A NEW ALBUM BY{' '}
-                <span className="text-purple-500">TALI$A KIDD</span>
+                A NEW ALBUM BY <span className="text-purple-500">~SAMUEL~</span>
               </h3>
               <div className="flex text-gray-700 gap-4 justify-center sm:justify-start">
                 <svg
@@ -87,20 +86,20 @@ export function HomeScreen({
           </div>
           <div className="basis-1/2">
             <Image
-              src="https://static.wixstatic.com/media/503ea4_ed9a38760ae04aab86b47e82525fdcac~mv2.jpg/v1/fill/w_918,h_585,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/503ea4_ed9a38760ae04aab86b47e82525fdcac~mv2.jpg"
-              alt="TALI$A"
+              src="/images/samuel001.png"
+              alt="Samuel performing live"
               className="w-full px-10 sm:px-0"
-              width={1000}
-              height={800}
+              width={800}
+              height={600}
             />
           </div>
         </div>
         <Image
           className="absolute inset-x-2/4 -translate-x-2/4 -translate-y-[20%] bottom-0 top-[20%] hidden sm:block"
-          src="https://static.wixstatic.com/media/c22c23_14f3a617cd684341b51dd1a3962c856e~mv2.png/v1/fill/w_202,h_245,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c22c23_14f3a617cd684341b51dd1a3962c856e~mv2.png"
-          alt="TALI$A"
-          width={202}
-          height={245}
+          src="/images/samuel002.png"
+          alt="Samuel tour poster"
+          width={402}
+          height={445}
         />
       </div>
       {events?.length ? (
@@ -129,9 +128,7 @@ export function HomeScreen({
               Merch
             </h1>
             <p className="text-lg my-10 text-black">
-              I am a paragraph. I’m a great space to write about what makes the
-              products special and explain how customers can benefit from these
-              items.
+              Get your merch to show your support!
             </p>
             <a
               href="/shop"

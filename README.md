@@ -4,6 +4,20 @@
 
 This template is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). It uses [Wix Headless](https://dev.wix.com/api/sdk/about-wix-headless/overview) to leverage the Wix Events and Wix Stores business solutions for managing event ticketing and a store.
 
+## Overview
+
+This project demonstrates how to build a full-featured events and commerce experience with **Next.js 13 App Router** and **Wix Headless CMS**. The Wix Headless SDK lets the template fetch and mutate content from Wix business solutions—such as Events, Stores, and Redirects—while Next.js handles rendering, routing, and streaming on both the server and client. 
+
+Key highlights:
+
+- **Headless CMS**: Store and manage event schedules, rich descriptions, inventory, and tickets in Wix, then query them through the Wix SDK.
+- **Next.js App Router**: Server Components render product and event pages with static generation plus incremental revalidation, while Client Components handle interactivity (e.g., cart, modals, filters).
+- **E-commerce & Ticketing**: Integrates the Wix Stores and Events APIs for product listings, quick-buy flows, ticket availability, schedules, and back-in-stock notifications.
+- **Theming & UI**: Tailwind CSS + Flowbite provide a responsive UI layer, while reusable components (gallery, schedule, table) keep markup consistent.
+- **Authentication-ready**: The template wires foundational UI (Login modal, sidebar) so you can hook member authentication or visitor flows through Wix.
+
+With this setup, marketing and content teams can keep using Wix dashboards to create products, events, and schedules, while developers deploy a modern React experience on any Next.js-friendly platform.
+
 ## Local Development
 
 Prerequisites:

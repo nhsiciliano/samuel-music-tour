@@ -73,14 +73,15 @@ export function NavBar() {
           <div className="h-[180px] w-[140px] overflow-hidden sm:h-auto sm:w-auto mx-auto">
             <Image
               className="mx-auto z-10"
-              src="https://static.wixstatic.com/media/503ea4_cb7ebc8a601749f098164d92ec7aa441~mv2.jpg/v1/fill/w_480,h_622,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/503ea4_cb7ebc8a601749f098164d92ec7aa441~mv2.jpg"
+              src="/images/samuel003.png"
               width={240}
               height={0}
-              alt="Talisa Kidd"
+              alt="Samuel Music"
             />
           </div>
           <h2 className="text-center text-2xl sm:text-[120px] z-20 sm:mt-[-150px]">
-            TALI$A KIDD
+            ~SAMUEL~ MUSIC
+            {/* TALI$A KIDD --- IGNORE --- */}
           </h2>
         </div>
         <ul className="flex flex-col items-center gap-4 justify-end mt-4 sm:mt-[140px]">

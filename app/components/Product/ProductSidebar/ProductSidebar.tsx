@@ -4,7 +4,7 @@ import { FC, useEffect, useMemo, useState } from 'react';
 import { HiArrowDown } from 'react-icons/hi';
 import { products } from '@wix/stores';
 import { ProductOptions } from '@app/components/Product/ProductOptions/ProductOptions';
-import { selectDefaultOptionFromProduct } from '@app/components/Product/ProductOptions/helpers';
+import type { SelectedOptions } from '@app/components/Product/ProductOptions/helpers';
 import { ProductTag } from '@app/components/Product/ProductTag/ProductTag';
 import { formatPrice } from '@app/utils/price-formatter';
 import { useUI } from '@app/components/Provider/context';
@@ -20,7 +20,7 @@ interface ProductSidebarProps {
 }
 
 const createProductOptions = (
-  selectedOptions?: any,
+  selectedOptions?: SelectedOptions,
   selectedVariant?: products.Variant
 ) =>
   Object.keys(selectedOptions ?? {}).length
@@ -31,13 +31,52 @@ const createProductOptions = (
       }
     : undefined;
 
+const getDefaultSelectedOptions = (
+  product: products.Product
+): SelectedOptions => {
+  const defaults: SelectedOptions = {};
+  product.productOptions?.forEach((option) => {
+    const defaultChoice = option.choices?.[0]?.description ?? null;
+    defaults[option.name!] = defaultChoice;
+  });
+  return defaults;
+};
+
+const getVariantForOptions = (
+  product: products.Product,
+  options: SelectedOptions
+) => {
+  if (!product.manageVariants) {
+    return undefined;
+  }
+  return product.variants?.find((variant) =>
+    Object.keys(variant.choices ?? {}).every(
+      (choice) => options[choice] === variant.choices?.[choice]
+    )
+  );
+};
+
 export const ProductSidebar: FC<ProductSidebarProps> = ({ product }) => {
   const addItem = useAddItemToCart();
   const { openSidebar, openModalBackInStock } = useUI();
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState<number>(1);
-  const [selectedVariant, setSelectedVariant] = useState<products.Variant>({});
-  const [selectedOptions, setSelectedOptions] = useState<any>({});
+  const defaultSelectedOptions = useMemo(
+    () => getDefaultSelectedOptions(product),
+    [product]
+  );
+  const defaultVariant = useMemo(
+    () => getVariantForOptions(product, defaultSelectedOptions),
+    [product, defaultSelectedOptions]
+  );
+  const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>(
+    () => ({
+      ...defaultSelectedOptions,
+    })
+  );
+  const [selectedVariant, setSelectedVariant] = useState<
+    products.Variant | undefined
+  >(() => defaultVariant);
 
   const price = formatPrice({
     amount: selectedVariant?.variant?.priceData?.price || product.price!.price!,
@@ -45,28 +84,16 @@ export const ProductSidebar: FC<ProductSidebarProps> = ({ product }) => {
   });
 
   useEffect(() => {
-    if (
-      product.manageVariants &&
-      Object.keys(selectedOptions).length === product.productOptions?.length
-    ) {
-      const variant = product.variants?.find((variant) =>
-        Object.keys(variant.choices!).every(
-          (choice) => selectedOptions[choice] === variant.choices![choice]
-        )
-      );
-      setSelectedVariant(variant!);
-    }
+    const variant = getVariantForOptions(product, selectedOptions);
+    setSelectedVariant(variant);
     setQuantity(1);
-  }, [
-    selectedOptions,
-    product.manageVariants,
-    product.productOptions?.length,
-    product.variants,
-  ]);
+  }, [selectedOptions, product]);
 
   useEffect(() => {
-    selectDefaultOptionFromProduct(product, setSelectedOptions);
-  }, [product]);
+    setSelectedOptions({ ...defaultSelectedOptions });
+    setSelectedVariant(defaultVariant);
+    setQuantity(1);
+  }, [product, defaultSelectedOptions, defaultVariant]);
 
   const isAvailableForPurchase = useMemo(() => {
     if (!product.manageVariants && product.stock?.inStock) {
@@ -107,9 +134,7 @@ export const ProductSidebar: FC<ProductSidebarProps> = ({ product }) => {
       selectedVariant
     );
     return `/api/quick-buy/${product._id}?quantity=${quantity}&productOptions=${
-      productOptions
-        ? decodeURIComponent(JSON.stringify(productOptions.options))
-        : ''
+      productOptions ? JSON.stringify(productOptions.options) : ''
     }`;
   }, [selectedOptions, selectedVariant, product._id, quantity]);
 
@@ -120,13 +145,15 @@ export const ProductSidebar: FC<ProductSidebarProps> = ({ product }) => {
         price={price}
         sku={product.sku ?? undefined}
       />
-      <div className="mt-2">
-        <ProductOptions
-          options={product.productOptions!}
-          selectedOptions={selectedOptions}
-          setSelectedOptions={setSelectedOptions}
-        />
-      </div>
+      {product.productOptions?.length ? (
+        <div className="mt-2">
+          <ProductOptions
+            options={product.productOptions}
+            selectedOptions={selectedOptions}
+            setSelectedOptions={setSelectedOptions}
+          />
+        </div>
+      ) : null}
       <div className="mb-6">
         <span className="text-xs tracking-wide">Quantity</span>
         <div className="mt-2">
@@ -170,7 +197,7 @@ export const ProductSidebar: FC<ProductSidebarProps> = ({ product }) => {
         <div>
           <BackInStockFormModal
             product={product}
-            variantId={selectedVariant._id}
+            variantId={selectedVariant?._id}
           />
           <button
             data-testid={testIds.PRODUCT_DETAILS.ADD_TO_CART_CTA}
@@ -188,39 +215,43 @@ export const ProductSidebar: FC<ProductSidebarProps> = ({ product }) => {
         className="pb-4 break-words w-full max-w-xl mt-6"
         dangerouslySetInnerHTML={{ __html: product.description ?? '' }}
       />
-      <div className="mt-6">
-        <Flowbite
-          theme={{
-            theme: {
-              accordion: {
-                content: { base: 'bg-transparent p-5' },
-                title: {
-                  heading: 'text-black',
-                  arrow: {
-                    base: 'text-black',
+      {product.additionalInfoSections?.length ? (
+        <div className="mt-6">
+          <Flowbite
+            theme={{
+              theme: {
+                accordion: {
+                  content: { base: 'bg-transparent p-5' },
+                  title: {
+                    heading: 'text-black',
+                    arrow: {
+                      base: 'text-black',
+                    },
                   },
                 },
               },
-            },
-          }}
-        >
-          <Accordion flush={true} arrowIcon={HiArrowDown}>
-            {product.additionalInfoSections!.map((info) => (
-              <Accordion.Panel key={info.title}>
-                <Accordion.Title>
-                  <span className="text-sm">{info.title}</span>
-                </Accordion.Title>
-                <Accordion.Content>
-                  <span
-                    className="text-sm"
-                    dangerouslySetInnerHTML={{ __html: info.description ?? '' }}
-                  />
-                </Accordion.Content>
-              </Accordion.Panel>
-            ))}
-          </Accordion>
-        </Flowbite>
-      </div>
+            }}
+          >
+            <Accordion flush={true} arrowIcon={HiArrowDown}>
+              {product.additionalInfoSections!.map((info) => (
+                <Accordion.Panel key={info.title}>
+                  <Accordion.Title>
+                    <span className="text-sm">{info.title}</span>
+                  </Accordion.Title>
+                  <Accordion.Content>
+                    <span
+                      className="text-sm"
+                      dangerouslySetInnerHTML={{
+                        __html: info.description ?? '',
+                      }}
+                    />
+                  </Accordion.Content>
+                </Accordion.Panel>
+              ))}
+            </Accordion>
+          </Flowbite>
+        </div>
+      ) : null}
     </>
   );
 };
