@@ -3724,8 +3724,8 @@ __metadata:
   linkType: hard
 
 "@wix/ricos@npm:^10.112.0":
-  version: 10.145.1
-  resolution: "@wix/ricos@npm:10.145.1"
+  version: 10.146.1
+  resolution: "@wix/ricos@npm:10.146.1"
   dependencies:
     "@codemirror/lang-json": ^6.0.0
     "@codemirror/lint": ^6.0.0
@@ -3788,7 +3788,6 @@ __metadata:
     prosemirror-state: ^1.0.0
     prosemirror-transform: ^1.0.0
     prosemirror-utils: 0.9.6
-    re-resizable: ^6.9.9
     react-click-outsider: 1.1.1
     react-colorful: ^5.6.1
     react-dock: ^0.6.0
@@ -3812,7 +3811,7 @@ __metadata:
     lodash: ^4.17.15
     react: ^16.14.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0
-  checksum: 1128b4c307ea26d2a2a259d1cca65ffea90735c218dd633a740401846e1ce92775d579123906911c4683c97e5f7a293b35be2611f9d0a6552f491b323608376b
+  checksum: 34a8332d1f4db3b45730f12e6bd9ec8e8c4ac2f8c3872c63b7e6432052318a6405f3d10633b500f6dcfebdab5d72efcaf99db44b0d0c4a9b6084f551e604f92a
   languageName: node
   linkType: hard
 
@@ -10002,16 +10001,6 @@ __metadata:
   bin:
     rc: ./cli.js
   checksum: 2e26e052f8be2abd64e6d1dabfbd7be03f80ec18ccbc49562d31f617d0015fbdbcf0f9eed30346ea6ab789e0fdfe4337f033f8016efdbee0df5354751842080e
-  languageName: node
-  linkType: hard
-
-"re-resizable@npm:^6.9.9":
-  version: 6.11.2
-  resolution: "re-resizable@npm:6.11.2"
-  peerDependencies:
-    react: ^16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 6e754c459f5e3b878184a4f3bffaef2f64ee32e4375e6a93f5f302eecc55d15f91fc7970d28a3ceb17b36292b421039b9cfcfe2ecef7785f44aeeb2d1baefa1a
   languageName: node
   linkType: hard
 
