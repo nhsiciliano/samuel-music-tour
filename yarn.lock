@@ -1563,6 +1563,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tiptap/extension-collaboration@npm:^3.6.2":
+  version: 3.10.7
+  resolution: "@tiptap/extension-collaboration@npm:3.10.7"
+  peerDependencies:
+    "@tiptap/core": ^3.10.7
+    "@tiptap/pm": ^3.10.7
+    "@tiptap/y-tiptap": ^3.0.0
+    yjs: ^13
+  checksum: 3c4b354b1b4b231bb785b968927ead18bec3503fe90e8f018685fc213d5f41390cedd64e41b952e8ecd253b7cebe0984a8e5332b6b946159f6ffb4b7304b6289
+  languageName: node
+  linkType: hard
+
 "@tiptap/extension-floating-menu@npm:^2.8.0":
   version: 2.26.3
   resolution: "@tiptap/extension-floating-menu@npm:2.26.3"
@@ -1626,6 +1638,21 @@ __metadata:
     "@tiptap/core": ^2.7.0
     "@tiptap/pm": ^2.7.0
   checksum: 872e45ef83ec89d48e606ec1e9a2f8131df3c65a99d740a0445e14a002eed5d497b0cf928b6e7ddc4eab78bdb19dd8d0df5126be0b1946c6f1348b2eeba0f928
+  languageName: node
+  linkType: hard
+
+"@tiptap/y-tiptap@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "@tiptap/y-tiptap@npm:3.0.1"
+  dependencies:
+    lib0: ^0.2.100
+  peerDependencies:
+    prosemirror-model: ^1.7.1
+    prosemirror-state: ^1.2.3
+    prosemirror-view: ^1.9.10
+    y-protocols: ^1.0.1
+    yjs: ^13.5.38
+  checksum: 9844d8afbd7f4545b622be57393fd3e93834ed01f53083a181f87ecc7c9035c4fd55a1e25622d8eb079ad2e27671016d4835da075f3613bcdde5d52654b49117
   languageName: node
   linkType: hard
 
@@ -3724,8 +3751,8 @@ __metadata:
   linkType: hard
 
 "@wix/ricos@npm:^10.112.0":
-  version: 10.145.1
-  resolution: "@wix/ricos@npm:10.145.1"
+  version: 10.151.0
+  resolution: "@wix/ricos@npm:10.151.0"
   dependencies:
     "@codemirror/lang-json": ^6.0.0
     "@codemirror/lint": ^6.0.0
@@ -3739,9 +3766,11 @@ __metadata:
     "@loadable/component": ^5.14.1
     "@popperjs/core": 2.11.2
     "@tiptap/core": 2.8.0
+    "@tiptap/extension-collaboration": ^3.6.2
     "@tiptap/pm": 2.8.0
     "@tiptap/react": 2.8.0
     "@tiptap/suggestion": 2.8.0
+    "@tiptap/y-tiptap": ^3.0.0
     "@uiw/codemirror-themes": ^4.21.25
     "@uiw/react-codemirror": ^4.19.7
     "@wix/design-system": ^1.211.0
@@ -3752,7 +3781,7 @@ __metadata:
     "@wix/unidriver-jsdom-react": ^1.3.6
     "@wix/unidriver-playwright": ^1.3.9
     "@wix/unidriver-puppeteer": ^1.3.6
-    "@wix/wix-ui-icons-common": ^3.89.0
+    "@wix/wix-ui-icons-common": ^3.102.0
     chokidar: ^4.0.1
     classnames: ^2.5.1
     dataloader: ^2.2.2
@@ -3788,7 +3817,6 @@ __metadata:
     prosemirror-state: ^1.0.0
     prosemirror-transform: ^1.0.0
     prosemirror-utils: 0.9.6
-    re-resizable: ^6.9.9
     react-click-outsider: 1.1.1
     react-colorful: ^5.6.1
     react-dock: ^0.6.0
@@ -3807,12 +3835,14 @@ __metadata:
     type-fest: ^2.12.2
     utility-types: ^3.10.0
     uuid: ^3.4.0
+    y-protocols: ^1.0.6
+    yjs: ^13.6.27
   peerDependencies:
     "@babel/runtime": ^7.17.2
     lodash: ^4.17.15
     react: ^16.14.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0
-  checksum: 1128b4c307ea26d2a2a259d1cca65ffea90735c218dd633a740401846e1ce92775d579123906911c4683c97e5f7a293b35be2611f9d0a6552f491b323608376b
+  checksum: a845440caf2056a60f72ca12bb176761aba31b76e4fa1ce69e6c233edd2dc529393a3743be3e16d84b7652940609693ecf77374110bdeef1964f533056184048
   languageName: node
   linkType: hard
 
@@ -4029,7 +4059,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wix/wix-ui-icons-common@npm:^3.89.0, @wix/wix-ui-icons-common@npm:^3.96.3":
+"@wix/wix-ui-icons-common@npm:^3.102.0":
+  version: 3.104.0
+  resolution: "@wix/wix-ui-icons-common@npm:3.104.0"
+  dependencies:
+    "@babel/runtime": ^7.26.0
+    tslib: ^2.8.1
+  checksum: 504de7bf8cbe78f1756c36783b83497e4d09e4587b6fad5f5bfd83eb9249828835f28a56af6c969c553c82116f193e405e91dbc5438cf6d56e30c237bd44dfa1
+  languageName: node
+  linkType: hard
+
+"@wix/wix-ui-icons-common@npm:^3.96.3":
   version: 3.96.3
   resolution: "@wix/wix-ui-icons-common@npm:3.96.3"
   dependencies:
@@ -7757,6 +7797,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"isomorphic.js@npm:^0.2.4":
+  version: 0.2.5
+  resolution: "isomorphic.js@npm:0.2.5"
+  checksum: d8d1b083f05f3c337a06628b982ac3ce6db953bbef14a9de8ad49131250c3592f864b73c12030fdc9ef138ce97b76ef55c7d96a849561ac215b1b4b9d301c8e9
+  languageName: node
+  linkType: hard
+
 "iterator.prototype@npm:^1.1.4":
   version: 1.1.5
   resolution: "iterator.prototype@npm:1.1.5"
@@ -8138,6 +8185,19 @@ __metadata:
     prelude-ls: ^1.2.1
     type-check: ~0.4.0
   checksum: 12c5021c859bd0f5248561bf139121f0358285ec545ebf48bb3d346820d5c61a4309535c7f387ed7d84361cf821e124ce346c6b7cef8ee09a67c1473b46d0fc4
+  languageName: node
+  linkType: hard
+
+"lib0@npm:^0.2.100, lib0@npm:^0.2.85, lib0@npm:^0.2.99":
+  version: 0.2.114
+  resolution: "lib0@npm:0.2.114"
+  dependencies:
+    isomorphic.js: ^0.2.4
+  bin:
+    0ecdsa-generate-keypair: bin/0ecdsa-generate-keypair.js
+    0gentesthtml: bin/gentesthtml.js
+    0serve: bin/0serve.js
+  checksum: af6583437c4a29bf015407fc81882009b3f0b916d308d05d93287b20f19f3bd41674e30ea6a98789bcc71cc4e32f748ad5d94ea657d82911003710bbf6018764
   languageName: node
   linkType: hard
 
@@ -10002,16 +10062,6 @@ __metadata:
   bin:
     rc: ./cli.js
   checksum: 2e26e052f8be2abd64e6d1dabfbd7be03f80ec18ccbc49562d31f617d0015fbdbcf0f9eed30346ea6ab789e0fdfe4337f033f8016efdbee0df5354751842080e
-  languageName: node
-  linkType: hard
-
-"re-resizable@npm:^6.9.9":
-  version: 6.11.2
-  resolution: "re-resizable@npm:6.11.2"
-  peerDependencies:
-    react: ^16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 6e754c459f5e3b878184a4f3bffaef2f64ee32e4375e6a93f5f302eecc55d15f91fc7970d28a3ceb17b36292b421039b9cfcfe2ecef7785f44aeeb2d1baefa1a
   languageName: node
   linkType: hard
 
@@ -12313,6 +12363,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"y-protocols@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "y-protocols@npm:1.0.6"
+  dependencies:
+    lib0: ^0.2.85
+  peerDependencies:
+    yjs: ^13.0.0
+  checksum: 4b57c8811befcf2e45c3d47830005f8a33e626c734f78a42fe8a4fa3caad2233ba85a7c8bceefbd52ffc40130d3f3faee664fd0d1c324ff1fa8817a056ccdc1c
+  languageName: node
+  linkType: hard
+
 "yallist@npm:^4.0.0":
   version: 4.0.0
   resolution: "yallist@npm:4.0.0"
@@ -12324,6 +12385,15 @@ __metadata:
   version: 5.0.0
   resolution: "yallist@npm:5.0.0"
   checksum: eba51182400b9f35b017daa7f419f434424410691bbc5de4f4240cc830fdef906b504424992700dc047f16b4d99100a6f8b8b11175c193f38008e9c96322b6a5
+  languageName: node
+  linkType: hard
+
+"yjs@npm:^13.6.27":
+  version: 13.6.27
+  resolution: "yjs@npm:13.6.27"
+  dependencies:
+    lib0: ^0.2.99
+  checksum: 3c934464cf28027278fa0d000568148d02af04d89d9debae7781aa50f09e20895de071120f9bd2b40faa115322a7ed8933518537344d78fb2a470e6d06df95a0
   languageName: node
   linkType: hard
 
